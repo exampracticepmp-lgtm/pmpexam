@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PMP Practice Exam 1</title>
+<style>
+:root{--ink:#1b1f33;--muted:#5d6280;--blue:#2744c8;--blue2:#1f38a8;--green:#16794a;--red:#b3261e;--amber:#c27a00;--line:#dfe2ee}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);min-height:100vh;background:#2a1450 url(assets/bg.jpg) center/cover fixed no-repeat;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:520px;margin:0 auto;padding:28px 16px 40px}
+.wide{max-width:900px}
+.card{background:rgba(255,255,255,.93);border:1px solid rgba(255,255,255,.7);border-radius:18px;padding:26px 24px;box-shadow:0 10px 40px rgba(20,0,60,.28);backdrop-filter:blur(8px)}
+h1{margin:0 0 14px;font-size:30px;text-align:center;letter-spacing:-.5px}
+h2{margin:0 0 10px;font-size:22px}
+.sub{color:var(--muted);text-align:center;font-size:17px;line-height:1.5;margin:0 0 18px}
+.price{font-size:54px;font-weight:800;text-align:center;margin:10px 0 14px;letter-spacing:-1px}
+.desc{text-align:center;line-height:1.55;font-size:17px;margin:0 0 6px}
+.support{font-size:15px;color:var(--muted);margin-top:10px}.support a{color:var(--blue);font-weight:600}
+.btn{display:block;width:100%;border:0;border-radius:12px;padding:16px;font-size:18px;font-weight:700;background:var(--blue);color:#fff;margin-top:16px;box-shadow:0 4px 14px rgba(39,68,200,.35)}
+.btn:hover{background:var(--blue2)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.outline{background:#fff;color:var(--blue);border:2px solid var(--blue);box-shadow:none}
+.btn.outline:hover{background:#eef1ff}
+.btn.sm{display:inline-block;width:auto;padding:10px 18px;font-size:15px;margin:0}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.warn{background:var(--amber);box-shadow:none}
+.note{color:#e9e4ff;text-align:center;font-size:16px;line-height:1.5;margin:14px 6px 0}
+.review{margin:18px 4px 0;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.45)}
+.review .who{display:flex;gap:12px;align-items:center}
+.avatar{width:52px;height:52px;border-radius:12px;background:rgba(255,255,255,.85);color:#2b3050;display:grid;place-items:center;font-weight:700;font-size:20px;text-shadow:none}
+.review b{font-size:18px}.review small{display:block;opacity:.9}
+.stars{color:#ffb400;font-size:30px;letter-spacing:2px;margin:8px 0 2px;text-shadow:none}
+.review p{margin:4px 0 14px;font-size:17px;line-height:1.5}
+label.f{display:block;font-weight:600;margin:14px 0 6px}
+input[type=text],input[type=password],textarea{width:100%;padding:13px 14px;border:1px solid #c9cde3;border-radius:10px;font:inherit;background:#fff}
+textarea{min-height:110px;resize:vertical}
+.err{color:var(--red);font-weight:600;margin-top:12px;text-align:center;min-height:22px}
+ul.rules{line-height:1.7;padding-left:20px;font-size:16.5px}
+ul.rules li{margin-bottom:8px}
+/* exam */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(24,12,56,.94);color:#fff;display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 18px;flex-wrap:wrap}
+.topbar .brand{font-weight:700}
+.tools{display:flex;gap:8px}
+.tool{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff;border-radius:10px;padding:8px 14px;font-weight:600}
+.tool:hover{background:rgba(255,255,255,.22)}
+.tool.on{background:#ffe66d;color:#241a00;border-color:#ffe66d}
+.tool .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#ffb400;margin-left:6px}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:20px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:10px}
+.timer.low{background:#b3261e;color:#fff}
+.exam{max-width:1180px;margin:0 auto;padding:20px 16px 40px;display:grid;grid-template-columns:270px minmax(0,1fr);gap:18px;align-items:start}
+.side{position:sticky;top:70px;padding:18px}
+.tlabel{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;text-align:center}
+.side .big{display:block;text-align:center;font-size:36px;background:#eef1ff;color:var(--blue);margin:6px 0 12px;padding:10px}
+.side .big.low{background:#fde8e6;color:var(--red)}
+.side .btn{margin-top:10px;padding:13px;font-size:16px}
+.bnote{font-size:13px;color:var(--muted);text-align:center;margin-top:6px;line-height:1.4}
+.prog{margin:14px 0 6px;font-weight:600;text-align:center}
+.navd summary{cursor:pointer;font-weight:700;padding:6px 0}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.qnum{font-weight:800;color:var(--blue);font-size:15px;letter-spacing:.5px;text-transform:uppercase}
+.flag{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-weight:600;color:var(--muted)}
+.flag.on{background:#fff4dc;border-color:#f0c36d;color:var(--amber)}
+.qtext{font-size:19px;line-height:1.6;margin:6px 0 16px}
+.hint{display:inline-block;background:#eef1ff;color:var(--blue);padding:4px 10px;border-radius:8px;font-weight:600;font-size:14px;margin-bottom:12px}
+.hlbar{background:#fff8cc;border:1px solid #ecd75a;border-radius:10px;padding:8px 12px;margin-bottom:14px;font-size:14px;color:#4a3d00}
+.choice{display:flex;gap:12px;align-items:flex-start;border:2px solid var(--line);border-radius:12px;padding:13px 14px;margin:10px 0;cursor:pointer;background:#fff;font-size:17px;line-height:1.5}
+.choice:hover{border-color:#aab6f0}
+.choice.sel{border-color:var(--blue);background:#eef1ff}
+.choice input{margin-top:5px;accent-color:var(--blue);transform:scale(1.25)}
+.letter{font-weight:800;color:var(--blue);min-width:20px}
+.hlmode .choice{cursor:text}
+.hlmode .qtext,.hlmode .choice span,.hlmode .casetx{cursor:text}
+mark{background:#ffe66d;color:inherit;border-radius:3px;padding:0 1px}
+.hlmode mark{cursor:pointer}
+.case{background:#f4f5fb;border:1px solid var(--line);border-radius:12px;padding:4px 16px;margin-bottom:18px}
+.case summary{cursor:pointer;font-weight:700;padding:10px 0}
+.casetx{white-space:pre-line;line-height:1.6;margin:0 0 12px;font-size:16px}
+.qimg{max-width:100%;border:1px solid var(--line);border-radius:10px;margin:0 0 16px;background:#fff}
+.nav{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.nav .btn{margin:0;flex:1;min-width:110px;padding:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;margin:10px 0}
+.grid button{padding:8px 0;border-radius:8px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:13px}
+.grid button.ans{background:var(--blue);color:#fff;border-color:var(--blue)}
+.grid button.fl{outline:3px solid #f0a500}
+.grid button.cur{box-shadow:0 0 0 3px #111 inset}
+.legend{font-size:12.5px;color:var(--muted)}
+.modal{position:fixed;inset:0;background:rgba(10,4,30,.62);display:grid;place-items:center;padding:16px;z-index:50}
+.modal .card{width:100%;max-width:560px;max-height:90vh;overflow:auto;background:#fff}
+.panel{position:fixed;z-index:40;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 40px rgba(20,0,60,.35);padding:12px}
+.panel h3{margin:0 0 8px;font-size:15px;display:flex;justify-content:space-between;align-items:center}
+.panel h3 button{border:0;background:none;font-size:20px;line-height:1}
+#calc{right:16px;bottom:16px;width:264px}
+#notes{right:16px;bottom:16px;width:320px}
+#notes textarea{min-height:150px}
+.cdisp{background:#101426;color:#fff;border-radius:10px;text-align:right;font-size:28px;padding:10px 12px;margin-bottom:8px;font-variant-numeric:tabular-nums;overflow:hidden;white-space:nowrap}
+.ckeys{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.ckeys button{padding:12px 0;border-radius:9px;border:1px solid var(--line);background:#f4f5fb;font-size:17px;font-weight:600}
+.ckeys button.op{background:#e2e8ff;color:var(--blue)}.ckeys button.eq{background:var(--blue);color:#fff}
+.bigscore{text-align:center}
+.bigscore .pct{font-size:76px;font-weight:800;letter-spacing:-2px;color:var(--blue)}
+.stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.stat{background:#f4f5fb;border-radius:12px;padding:10px 18px;text-align:center;min-width:120px}
+.stat b{display:block;font-size:22px}.stat span{font-size:13px;color:var(--muted)}
+.revbanner{position:sticky;top:0;z-index:25;background:#ffe66d;color:#241a00;display:flex;gap:12px;justify-content:center;align-items:center;padding:12px 16px;flex-wrap:wrap;font-weight:600;text-align:center}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.filters button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:600}
+.filters button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.ri{border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0;background:#fff}
+.chip{display:inline-block;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:700;margin-left:8px}
+.chip.ok{background:#e3f5ec;color:var(--green)}.chip.no{background:#fde8e6;color:var(--red)}.chip.na{background:#eee;color:#555}
+.ro{padding:9px 12px;border-radius:9px;margin:6px 0;border:1px solid var(--line);line-height:1.45}
+.ro.right{background:#e3f5ec;border-color:#9bd3b5}.ro.wrong{background:#fde8e6;border-color:#f0a8a2}
+.expl{background:#f4f5fb;border-left:4px solid var(--blue);padding:12px 14px;border-radius:8px;margin-top:12px;line-height:1.55;white-space:pre-line}
+.stars-in{display:flex;gap:6px;justify-content:center;margin:10px 0}
+.stars-in button{background:none;border:0;font-size:42px;color:#cfd2e3;padding:0;line-height:1}
+.stars-in button.on{color:#ffb400}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.breakbox{text-align:center}
+.bigtimer{font-size:64px;font-weight:800;font-variant-numeric:tabular-nums;margin:14px 0;color:var(--blue)}
+.match{display:grid;grid-template-columns:200px 1fr;gap:16px}
+.pool,.targets{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fafbff}
+.mchip{display:block;width:100%;background:#dde6fb;border:1px solid #9db3ee;color:#17307f;font-weight:700;border-radius:10px;padding:14px 8px;margin:8px 0;text-align:center;cursor:grab;user-select:none}
+.mchip.sel{outline:3px solid var(--blue)}
+.mrow{display:grid;grid-template-columns:1fr 150px;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:0}
+.slot{min-height:54px;border:2px dashed #7c8fe0;border-radius:10px;display:grid;place-items:center;color:#8a90b0;font-weight:600;padding:4px;cursor:pointer}
+.slot.over{background:#eef1ff}.slot .mchip{margin:0}
+.badge{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#12275e;color:#fff;font-weight:700;font-size:14px;margin-right:8px}
+@media(min-width:901px){.topbar .timerv{display:none}}
+@media(max-width:900px){.exam{grid-template-columns:1fr}.side{position:static}.side .big,.side .tlabel{display:none}}
+@media(max-width:640px){.match{grid-template-columns:1fr}.mrow{grid-template-columns:1fr}.price{font-size:46px}h1{font-size:26px}.topbar .brand{display:none}#calc,#notes{left:8px;right:8px;width:auto}.tool{padding:8px 10px;font-size:14px}}
+
+/* ===== v3 redesign: split-card model + darts wallpaper ===== */
+:root{--ink:#111427;--muted:#5f6784;--blue:#4338ca;--blue2:#3730a3;--navy:#111427;--green:#3f9468;--line:#e3e6f0}
+body{background:#eef3fa url(assets/bg.jpg) 62% center/cover fixed no-repeat}
+.page{min-height:100vh;display:flex;flex-direction:column}
+.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 16px}
+.split{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1fr);width:100%;max-width:980px;border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 24px 70px rgba(15,18,50,.35)}
+.split-l{background:linear-gradient(135deg,#312e81 0%,#161938 48%,#0f1226 100%);color:#fff;padding:36px 34px;display:flex;flex-direction:column}
+.split-r{background:#fff;padding:36px 34px;display:flex;flex-direction:column;justify-content:center}
+.badge2{align-self:flex-start;background:rgba(99,102,241,.28);border:1px solid rgba(129,140,248,.5);color:#c7d2fe;font-weight:700;font-size:13px;letter-spacing:.8px;padding:7px 14px;border-radius:999px;text-transform:uppercase}
+.split-l h2{font-size:34px;line-height:1.15;margin:26px 0 16px;letter-spacing:-.5px}
+.split-l p{color:#dfe3ff;line-height:1.65;font-size:16px;margin:0 0 22px}
+ul.checks{list-style:none;margin:0;padding:0}
+ul.checks li{display:flex;gap:12px;align-items:center;margin:0 0 14px;font-size:16px}
+ul.checks li:before{content:"✓";color:#4ade80;font-weight:800}
+.split-l .sup{margin-top:auto;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);font-size:14.5px;color:#b8bfe6}
+.split-l .sup a{color:#a5b4fc;text-decoration:none}
+.split-r h2{margin:0 0 8px;font-size:28px;text-align:center;letter-spacing:-.4px}
+.split-r .lead{text-align:center;color:var(--muted);font-size:16.5px;margin:0 0 22px;line-height:1.5}
+.pricebox{border:1px solid var(--line);background:#f8f9fc;border-radius:14px;text-align:center;padding:16px 10px;margin-bottom:20px}
+.pricebox small{display:block;font-weight:700;letter-spacing:1px;color:var(--muted);font-size:13px}
+.pricebox b{font-size:46px;letter-spacing:-1px}.pricebox span{color:var(--muted);font-weight:600;margin-left:6px}
+.btn{background:var(--navy);box-shadow:none;border-radius:12px;margin-top:0}
+.btn:hover{background:#1f2347}
+.btn.pay{background:var(--green);box-shadow:0 8px 20px rgba(63,148,104,.28)}
+.btn.pay:hover{background:#36805a}
+.btn.outline{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn.outline:hover{background:#f1f2f8}
+.btn svg,.btn .ppl{vertical-align:-3px;margin-right:8px}
+.ppl{font-style:italic;font-weight:900;font-family:Georgia,serif}
+.or{display:flex;align-items:center;gap:12px;color:#8a91ad;font-weight:700;font-size:13px;letter-spacing:.8px;text-transform:uppercase;margin:20px 0}
+.or:before,.or:after{content:"";flex:1;height:1px;background:var(--line)}
+.fine{color:#8a91ad;font-size:14px;text-align:center;margin:16px 0 0;line-height:1.5}
+.foot{background:#fff;border-top:1px solid var(--line);text-align:center;padding:16px;color:var(--muted);font-size:14.5px}
+.foot a,.split-r a{color:var(--blue);text-decoration:none;font-weight:600}
+.split-r label.f{font-size:14px}
+.split-r .rules{margin:0 0 18px;font-size:15.5px}
+.review{background:#fff;color:var(--ink);text-shadow:none;border-radius:14px;padding:14px 16px;margin:12px 0;width:100%;max-width:980px;box-shadow:0 10px 30px rgba(15,18,50,.18)}
+.stars{font-size:20px;margin:6px 0 2px}
+.avatar{background:#eef0ff;color:#312e81}
+.card{background:rgba(255,255,255,.96);box-shadow:0 14px 44px rgba(15,18,50,.28)}
+.topbar{background:linear-gradient(90deg,#171a3d,#0f1226)}
+.choice.sel{background:#eef0ff}
+.grid button.ans{background:var(--navy);border-color:var(--navy)}
+.bigscore .pct{color:var(--navy)}
+.revbanner{background:#c7d2fe;color:#111427}
+@media(min-width:1100px){body{background-position:0% center}.center{align-items:flex-start;padding-left:6vw}.split{max-width:920px}.review{max-width:920px}}
+@media(max-width:820px){.split{grid-template-columns:1fr}.split-r{order:-1}.split-l{padding:28px 24px}.split-r{padding:28px 22px}.split-l h2{font-size:28px}body{background-position:72% center}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="data.enc.js"></script>
+<script>
+/* ============ CONFIG (edit these) ============ */
+const CONFIG={
+  EXAM_TITLE:"PMP Practice Exam 1",
+  PRICE:"$1.99",
+  PAYPAL_URL:"https://www.paypal.com/ncp/payment/X82ZYXMNGRNXC",
+  SUPPORT_EMAIL:"exampracticepmp@gmail.com",
+  API_URL:"",             // <- paste your Google Apps Script Web App URL here (see README)
+  EXAM_MINUTES:240,       // 4 hours
+  BREAK_MINUTES:10,       // two breaks of 10 minutes
+  SECTION_ENDS:[59,120]   // break 1 after question 59, break 2 after question 120
+};
+/* =============================================== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LS='pmp_exam1_state_v2',LSR='pmp_exam1_reviews_v2';
+let DATA=null,S=null,tick=null,filter='all',hlOn=false;
+const L=i=>String.fromCharCode(65+i);
+const secOf=i=>i<CONFIG.SECTION_ENDS[0]?1:i<CONFIG.SECTION_ENDS[1]?2:3;
+
+function load(){try{return JSON.parse(localStorage.getItem(LS))}catch(e){return null}}
+function save(){try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}}
+function newState(){return{phase:'intro',idx:0,answers:{},flags:{},notes:{},hl:{},remaining:CONFIG.EXAM_MINUTES*60000,endAt:null,used:{},offered:{},breakSec:null,breakEndAt:null,pending:null,startedAt:null,finishedAt:null,reviewed:false}}
+
+/* ---------- crypto: the question bank is encrypted with the login ---------- */
+const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function decryptBank(user,pass){
+  const E=window.PMP_ENC; if(!E) throw new Error('data');
+  const enc=new TextEncoder();
+  const base=await crypto.subtle.importKey('raw',enc.encode(user.trim().toLowerCase()+':'+pass),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(E.salt),iterations:E.iter,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(E.iv)},key,b64(E.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+
+/* ---------- reviews ---------- */
+function fmtDate(d){const x=new Date(d);return isNaN(x)?'':x.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
+async function fetchReviews(){
+  let list=[];
+  if(CONFIG.API_URL){try{const r=await fetch(CONFIG.API_URL+(CONFIG.API_URL.includes('?')?'&':'?')+'action=reviews');list=await r.json()}catch(e){}}
+  if(!list.length){try{list=JSON.parse(localStorage.getItem(LSR))||[]}catch(e){}}
+  return list.filter(r=>r&&r.comment).slice(0,3);
+}
+async function postReview(rv){
+  const pub={name:rv.first+' '+(rv.last[0]||'').toUpperCase()+'.',rating:rv.rating,comment:rv.comment};
+  try{const a=JSON.parse(localStorage.getItem(LSR))||[];a.unshift({...pub,date:new Date().toISOString()});localStorage.setItem(LSR,JSON.stringify(a.slice(0,20)))}catch(e){}
+  if(CONFIG.API_URL){try{await fetch(CONFIG.API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'review',firstName:rv.first,lastName:rv.last,name:pub.name,rating:rv.rating,comment:rv.comment})})}catch(e){}}
+}
+
+/* ---------- helpers ---------- */
+function show(html,keep){const y=window.scrollY;$('#app').innerHTML=html;if(!keep)window.scrollTo(0,0);else window.scrollTo(0,y)}
+function closePanels(){['calc','notes'].forEach(id=>{const e=document.getElementById(id);if(e)e.remove()})}
+function modal(inner){const el=document.createElement('div');el.className='modal';el.innerHTML='<div class="card">'+inner+'</div>';document.body.appendChild(el);return el}
+const fmt=ms=>{const s=Math.ceil(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return [h,m,x].map(v=>String(v).padStart(2,'0')).join(':')};
+const left=()=>S.phase==='exam'?Math.max(0,S.endAt-Date.now()):S.remaining;
+
+
+const LOCK='<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2zm-7-2a2 2 0 0 1 4 0v2h-4V7z"/></svg>';
+function leftPanel(badge,title,text,items){
+  return `<section class="split-l"><span class="badge2">${badge}</span><h2>${title}</h2><p>${text}</p>
+  <ul class="checks">${items.map(i=>`<li>${i}</li>`).join('')}</ul>
+  <div class="sup">Support: <a href="mailto:${esc(CONFIG.SUPPORT_EMAIL)}">${esc(CONFIG.SUPPORT_EMAIL)}</a></div></section>`;
+}
+const FEATURES=['Full 180 Questions Bank','Realistic 4-Hour Timer &amp; Breaks','Integrated Calculator &amp; Tools','Detailed PMI Principles &amp; Answers'];
+function shell(inner){
+  return `<div class="page"><main class="center">${inner}</main><footer class="foot">PMP® Exam Practice Simulator © 2026. All Rights Reserved. Contact Support: <a href="mailto:${esc(CONFIG.SUPPORT_EMAIL)}">${esc(CONFIG.SUPPORT_EMAIL)}</a></footer></div>`;
+}
+
+/* ---------- landing / login / instructions ---------- */
+async function landing(){
+  clearInterval(tick);closePanels();
+  show(shell(`<div class="split">
+    ${leftPanel('2026 Edition','Master the PMP® Exam','Experience realistic 180-question simulation based on official PMI methodologies, agile frameworks, and hybrid scenarios.',FEATURES)}
+    <section class="split-r">
+      <h2>Get Full Simulator Access</h2>
+      <p class="lead">One-time payment for immediate full exam access</p>
+      <div class="pricebox"><small>LIFETIME PASS</small><b>${esc(CONFIG.PRICE)}</b><span>USD</span></div>
+      <button class="btn pay" id="pay"><span class="ppl">P</span>Pay to Get Access (${esc(CONFIG.PRICE)}) →</button>
+      <div class="or">Already have login details?</div>
+      <button class="btn" id="have">${LOCK}Login to Simulator</button>
+      <p class="fine">After payment completion, check your email for instant credentials delivery.</p>
+    </section></div><div id="revs"></div>`));
+  $('#pay').onclick=()=>{window.location.href=CONFIG.PAYPAL_URL};
+  $('#have').onclick=loginScreen;
+  const list=await fetchReviews();
+  if(list.length&&$('#revs')){
+    $('#revs').innerHTML=list.map(r=>{
+      const n=(r.name||'Verified candidate').trim()||'Verified candidate';
+      const ini=n.split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
+      const st=Math.max(1,Math.min(5,+r.rating||5));
+      return `<div class="review"><div class="who"><div class="avatar">${esc(ini)}</div><div><b>${esc(n)}</b><small>${esc(fmtDate(r.date))}</small></div></div>
+      <div class="stars">${'★'.repeat(st)}${'☆'.repeat(5-st)}</div><p>${esc(r.comment)}</p></div>`}).join('');
+  }
+}
+function loginScreen(){
+  show(shell(`<div class="split">
+    ${leftPanel('Member access','Welcome back','Sign in with the username and password you received by email after your payment.',FEATURES)}
+    <section class="split-r">
+      <h2>Login to Simulator</h2>
+      <p class="lead">Enter the username and password from your confirmation email.</p>
+      <label class="f" for="u">Username</label><input type="text" id="u" autocomplete="username" autocapitalize="none" spellcheck="false">
+      <label class="f" for="p">Password</label><input type="password" id="p" autocomplete="current-password">
+      <div class="err" id="err"></div>
+      <button class="btn" id="go">${LOCK}Login</button>
+      <button class="btn outline" id="back" style="margin-top:12px">← Back</button>
+    </section></div>`));
+  const go=async()=>{
+    const u=$('#u').value,p=$('#p').value;
+    if(!u||!p){$('#err').textContent='Please enter your username and password.';return}
+    $('#go').disabled=true;$('#go').textContent='Checking…';$('#err').textContent='';
+    try{DATA=await decryptBank(u,p)}
+    catch(e){
+      $('#go').disabled=false;$('#go').innerHTML=LOCK+'Login';
+      $('#err').textContent=(e&&e.message==='data')?'Exam data is missing. Contact support.':(window.crypto&&crypto.subtle?'Incorrect username or password.':'This page must be opened over https (or localhost).');
+      return}
+    S=load()||newState();route();
+  };
+  $('#go').onclick=go;$('#p').addEventListener('keydown',e=>{if(e.key==='Enter')go()});$('#u').addEventListener('keydown',e=>{if(e.key==='Enter')$('#p').focus()});
+  $('#back').onclick=landing;
+}
+function route(){
+  if(S.phase==='intro')return intro();
+  if(S.phase==='exam'){startTick();return examScreen()}
+  if(S.phase==='break')return breakScreen();
+  if(S.phase==='results')return results();
+}
+function intro(){
+  show(shell(`<div class="split">
+    ${leftPanel('Before you begin','Exam Instructions','Read the instructions carefully, then start when you are ready.',['180 scenario-based questions','4-hour countdown timer','Two 10-minute breaks','Calculator, highlighter &amp; notes'])}
+    <section class="split-r">
+      <ul class="rules">
+        <li><b>Total Questions:</b> This exam consists of 180 questions based on real-world PMP exam scenarios.</li>
+        <li><b>Case Studies:</b> There are 2 case studies, each containing 5 questions.</li>
+        <li><b>Exam Tools:</b> During the exam, you can access an integrated calculator, a highlighting tool, and a comment/notes tool simply by clicking their respective buttons on the toolbar.</li>
+        <li><b>Time Limit:</b> The total exam time is 4 hours. Please ensure you submit your answers before the timer runs out.</li>
+        <li><b>Breaks:</b> You may take one 10-minute break during questions 1–59 and one 10-minute break during questions 60–120. The exam clock is paused during a break. There is no break after question 120.</li>
+        <li><b>Feedback:</b> Please leave a review after completing the exam. Your feedback and experience are incredibly important to us as we continue to improve our exam simulator.</li>
+      </ul>
+      <button class="btn pay" id="start">Start the Exam</button>
+    </section></div>`));
+  $('#start').onclick=()=>{S.phase='exam';S.startedAt=Date.now();S.endAt=Date.now()+S.remaining;save();startTick();examScreen()};
+}
+function startTick(){
+  clearInterval(tick);
+  tick=setInterval(()=>{
+    if(S.phase==='exam'){const l=left();document.querySelectorAll('.timerv').forEach(t=>{t.textContent=fmt(l);t.classList.toggle('low',l<600000)});if(l<=0)finish(true)}
+    else if(S.phase==='break'&&S.breakEndAt){const l=Math.max(0,S.breakEndAt-Date.now());const b=$('#btimer');if(b)b.textContent=fmt(l).slice(3);if(l<=0)endBreak()}
+  },500);
+}
+
+/* ---------- highlight helpers ---------- */
+function mergeR(r){r=r.slice().sort((a,b)=>a[0]-b[0]);const o=[];for(const x of r){if(o.length&&x[0]<=o[o.length-1][1])o[o.length-1][1]=Math.max(o[o.length-1][1],x[1]);else o.push(x.slice())}return o}
+function hl(text,key,q){
+  const r=mergeR(((S.hl[q.n]||{})[key])||[]);let out='',p=0;
+  for(const [s,e] of r){if(s>=text.length)break;out+=esc(text.slice(p,s))+`<mark data-s="${s}" data-e="${e}">${esc(text.slice(s,e))}</mark>`;p=Math.min(e,text.length)}
+  return out+esc(text.slice(p));
+}
+function onSelect(){
+  if(!hlOn||!S||S.phase!=='exam')return;
+  const sel=getSelection();if(!sel||sel.isCollapsed||!sel.rangeCount)return;
+  const rg=sel.getRangeAt(0);
+  const el=n=>(n.nodeType===1?n:n.parentElement).closest('[data-hk]');
+  const a=el(rg.startContainer),b=el(rg.endContainer);
+  if(!a||a!==b)return;
+  const pre=document.createRange();pre.selectNodeContents(a);pre.setEnd(rg.startContainer,rg.startOffset);
+  const txt=rg.toString();const s=pre.toString().length,e=s+txt.length;
+  if(!txt.trim())return;
+  const q=DATA.questions[S.idx],key=a.dataset.hk;
+  S.hl[q.n]=S.hl[q.n]||{};S.hl[q.n][key]=mergeR([...(S.hl[q.n][key]||[]),[s,e]]);
+  sel.removeAllRanges();save();examScreen(true);
+}
+document.addEventListener('mouseup',()=>setTimeout(onSelect,0));
+document.addEventListener('touchend',()=>setTimeout(onSelect,350));
+document.addEventListener('click',e=>{
+  if(!hlOn||!S||S.phase!=='exam')return;
+  const m=e.target.closest&&e.target.closest('mark[data-s]');if(!m)return;
+  const sel=getSelection();if(sel&&!sel.isCollapsed)return;
+  const host=m.closest('[data-hk]'),q=DATA.questions[S.idx],k=host.dataset.hk;
+  const s=+m.dataset.s,en=+m.dataset.e;
+  S.hl[q.n][k]=mergeR(S.hl[q.n][k]).filter(r=>!(r[0]===s&&r[1]===en));save();examScreen(true);
+});
+
+/* ---------- calculator ---------- */
+const C={d:'0',acc:null,op:null,fresh:true};
+function cfmt(x){if(!isFinite(x))return 'Error';return String(parseFloat(x.toPrecision(12)))}
+function cpress(k){
+  const num=()=>parseFloat(C.d);
+  if(C.d==='Error'&&k!=='C'){return}
+  if(/^[0-9]$/.test(k)){if(C.fresh){C.d=k;C.fresh=false}else C.d=C.d==='0'?k:C.d+k}
+  else if(k==='.'){if(C.fresh){C.d='0.';C.fresh=false}else if(!C.d.includes('.'))C.d+='.'}
+  else if(k==='C'){C.d='0';C.acc=null;C.op=null;C.fresh=true}
+  else if(k==='⌫'){if(!C.fresh&&C.d.length>1)C.d=C.d.slice(0,-1);else{C.d='0';C.fresh=true}}
+  else if(k==='±'){C.d=C.d.startsWith('-')?C.d.slice(1):(C.d==='0'?'0':'-'+C.d)}
+  else if(k==='%'){C.d=cfmt(num()/100);C.fresh=true}
+  else if(k==='√'){C.d=num()<0?'Error':cfmt(Math.sqrt(num()));C.fresh=true}
+  else if('+−×÷'.includes(k)){if(C.op&&!C.fresh){C.acc=ccalc();C.d=cfmt(C.acc)}else C.acc=num();C.op=k;C.fresh=true}
+  else if(k==='='){if(C.op){C.d=cfmt(ccalc());C.acc=null;C.op=null;C.fresh=true}}
+  const d=$('#cdisp');if(d)d.textContent=C.d;
+}
+function ccalc(){const a=C.acc,b=parseFloat(C.d);return C.op==='+'?a+b:C.op==='−'?a-b:C.op==='×'?a*b:b===0?NaN:a/b}
+function toggleCalc(){
+  const ex=$('#calc');if(ex){ex.remove();return}
+  const p=document.createElement('div');p.id='calc';p.className='panel';
+  const keys=['C','⌫','%','÷','7','8','9','×','4','5','6','−','1','2','3','+','±','0','.','=','√'];
+  p.innerHTML=`<h3>Calculator <button id="cx" aria-label="Close">×</button></h3><div class="cdisp" id="cdisp">${esc(C.d)}</div><div class="ckeys">${keys.map(k=>`<button class="${'÷×−+'.includes(k)?'op':k==='='?'eq':''}" data-k="${k}">${k}</button>`).join('')}</div>`;
+  document.body.appendChild(p);
+  p.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>cpress(b.dataset.k));
+  p.querySelector('#cx').onclick=()=>p.remove();
+}
+/* ---------- comment / notes ---------- */
+function toggleNotes(){
+  const ex=$('#notes');if(ex){ex.remove();return}
+  const q=DATA.questions[S.idx];
+  const p=document.createElement('div');p.id='notes';p.className='panel';
+  p.innerHTML=`<h3><span>Comment — Question <span id="nq">${S.idx+1}</span></span><button id="nx" aria-label="Close">×</button></h3><textarea id="nt" maxlength="2000" placeholder="Write any note about this question…"></textarea><div class="bnote">Notes are saved automatically for each question.</div>`;
+  document.body.appendChild(p);
+  const t=p.querySelector('#nt');t.value=S.notes[q.n]||'';
+  t.oninput=()=>{const qq=DATA.questions[S.idx];if(t.value.trim())S.notes[qq.n]=t.value;else delete S.notes[qq.n];save();const d=document.querySelector('#tnotes .dot');if(d)d.style.display=S.notes[qq.n]?'inline-block':'none'};
+  p.querySelector('#nx').onclick=()=>p.remove();
+}
+function syncNotes(){const p=$('#notes');if(!p)return;const q=DATA.questions[S.idx];$('#nt').value=S.notes[q.n]||'';$('#nq').textContent=S.idx+1}
+
+/* ---------- exam ---------- */
+const ansOf=q=>S.answers[q.n];
+function answered(q){const a=S.answers[q.n];if(!a)return false;return q.type==='match'?a.some(Boolean):a.length>0}
+function examScreen(keep){
+  const Q=DATA.questions,q=Q[S.idx],a=ansOf(q)||[];
+  const cs=q.case?DATA.cases[q.case]:null;
+  const sec=secOf(S.idx),canBreak=sec<3&&!S.used[sec];
+  let body='';
+  if(q.type==='match'){
+    const used=new Set(a.filter(Boolean));
+    body=`<div class="hint">Drag each option onto a scenario (or tap an option, then tap a box)</div>
+    <div class="match"><div class="pool" id="pool"><b>OPTIONS</b>${q.options.filter(o=>!used.has(o)).map(o=>`<div class="mchip${S.sel===o?' sel':''}" draggable="true" data-o="${esc(o)}">${esc(o)}</div>`).join('')}</div>
+    <div class="targets">${q.items.map((t,i)=>`<div class="mrow"><div><span class="badge">${L(i)}</span>${esc(t)}</div>
+      <div class="slot" data-i="${i}">${a[i]?`<div class="mchip" draggable="true" data-o="${esc(a[i])}">${esc(a[i])}</div>`:'Drop here'}</div></div>`).join('')}</div></div>`;
+  }else{
+    const multi=q.type==='multi';
+    body=(multi?`<div class="hint">Select ${q.pick} answers</div>`:'')+q.choices.map((c,i)=>`<label class="choice${a.includes(i)?' sel':''}"><input type="${multi?'checkbox':'radio'}" name="c" value="${i}" ${a.includes(i)?'checked':''}><span class="letter">${L(i)}</span><span data-hk="c${i}">${hl(c,'c'+i,q)}</span></label>`).join('');
+  }
+  const done=Q.filter(answered).length;
+  const grid=Q.map((x,i)=>`<button data-i="${i}" class="${answered(x)?'ans ':''}${S.flags[x.n]?'fl ':''}${i===S.idx?'cur':''}">${i+1}</button>`).join('');
+  const l=left();
+  show(`<div class="topbar">
+      <div class="tools">
+        <button class="tool" id="tcalc">🧮 Calculator</button>
+        <button class="tool" id="tnotes">📝 Comment<span class="dot" style="display:${S.notes[q.n]?'inline-block':'none'}"></span></button>
+        <button class="tool${hlOn?' on':''}" id="thl">🖍 Highlighter</button>
+      </div>
+      <div class="brand">${esc(CONFIG.EXAM_TITLE)} · Question ${S.idx+1} of ${Q.length}</div>
+      <div class="timer timerv${l<600000?' low':''}">${fmt(l)}</div>
+    </div>
+    <div class="exam${hlOn?' hlmode':''}">
+      <aside class="side card">
+        <div class="tlabel">Time remaining</div>
+        <div class="timer big timerv${l<600000?' low':''}">${fmt(l)}</div>
+        <button class="btn warn" id="brk" ${canBreak?'':'disabled'}>${sec===3?'No break in this section':canBreak?'☕ Break (10 min)':'Break used'}</button>
+        <div class="bnote">${sec===1?'Break 1: available during questions 1–59':sec===2?'Break 2: available during questions 60–120':'Questions 121–180: no break'}</div>
+        <div class="prog">Answered ${done} / ${Q.length}</div>
+        <details class="navd" id="navd"><summary>Question navigator</summary><div class="grid">${grid}</div><div class="legend">Blue = answered · Orange outline = flagged · Black ring = current</div></details>
+        <button class="btn outline" id="fin2">Submit exam</button>
+      </aside>
+      <div class="card main">
+        ${hlOn?'<div class="hlbar">🖍 Highlighter is ON — select text in the question or answers to highlight it. Click a highlight to remove it.</div>':''}
+        ${cs?`<details class="case" open><summary>${esc(cs.title)}</summary><div class="casetx" data-hk="cs">${hl(cs.text,'cs',q)}</div></details>`:''}
+        <div class="qhead"><span class="qnum">Question ${S.idx+1}</span><button class="flag${S.flags[q.n]?' on':''}" id="flag">⚑ ${S.flags[q.n]?'Flagged':'Flag for review'}</button></div>
+        <div class="qtext" data-hk="stem">${hl(q.text,'stem',q)}</div>
+        ${q.image?`<img class="qimg" src="${q.image}" alt="Sprint burndown chart">`:''}
+        ${body}
+        <div class="nav">
+          <button class="btn ghost" id="prev" ${S.idx===0?'disabled':''}>← Previous</button>
+          ${S.idx===Q.length-1?'<button class="btn warn" id="fin">Submit exam</button>':'<button class="btn" id="next">Next →</button>'}
+        </div>
+      </div>
+    </div>`,keep);
+  $('#flag').onclick=()=>{S.flags[q.n]=!S.flags[q.n];save();examScreen(true)};
+  $('#prev').onclick=()=>go(S.idx-1);
+  if($('#next'))$('#next').onclick=()=>go(S.idx+1);
+  if($('#fin'))$('#fin').onclick=confirmFinish;
+  $('#fin2').onclick=confirmFinish;
+  $('#brk').onclick=confirmBreak;
+  $('#tcalc').onclick=toggleCalc;$('#tnotes').onclick=toggleNotes;
+  $('#thl').onclick=()=>{hlOn=!hlOn;examScreen(true)};
+  document.querySelectorAll('#navd .grid button').forEach(b=>b.onclick=()=>go(+b.dataset.i));
+  if(matchMedia('(min-width:901px)').matches)$('#navd').open=true;
+  if(hlOn)document.querySelectorAll('.choice').forEach(c=>c.addEventListener('click',e=>e.preventDefault()));
+  syncNotes();
+  if(q.type==='match')wireMatch(q);
+  else if(!hlOn)document.querySelectorAll('input[name=c]').forEach(inp=>inp.onchange=()=>{
+    const i=+inp.value;
+    if(q.type==='single'){S.answers[q.n]=[i]}
+    else{let cur=S.answers[q.n]||[];cur=cur.includes(i)?cur.filter(x=>x!==i):[...cur,i];if(cur.length>q.pick)cur=cur.slice(-q.pick);S.answers[q.n]=cur}
+    save();examScreen(true);
+  });
+}
+function wireMatch(q){
+  const set=(i,o)=>{let a=(S.answers[q.n]||q.items.map(()=>null)).slice();a=a.map(x=>x===o?null:x);a[i]=o;S.answers[q.n]=a;S.sel=null;save();examScreen(true)};
+  const clear=i=>{const a=(S.answers[q.n]||[]).slice();a[i]=null;S.answers[q.n]=a;save();examScreen(true)};
+  document.querySelectorAll('.mchip').forEach(c=>{
+    c.ondragstart=e=>e.dataTransfer.setData('text/plain',c.dataset.o);
+    c.onclick=e=>{e.stopPropagation();if(c.closest('.slot')){clear(+c.closest('.slot').dataset.i);return}S.sel=S.sel===c.dataset.o?null:c.dataset.o;examScreen(true)};
+  });
+  document.querySelectorAll('.slot').forEach(s=>{
+    s.ondragover=e=>{e.preventDefault();s.classList.add('over')};
+    s.ondragleave=()=>s.classList.remove('over');
+    s.ondrop=e=>{e.preventDefault();set(+s.dataset.i,e.dataTransfer.getData('text/plain'))};
+    s.onclick=()=>{if(S.sel)set(+s.dataset.i,S.sel)};
+  });
+  const pool=$('#pool');pool.ondragover=e=>e.preventDefault();
+  pool.ondrop=e=>{e.preventDefault();const o=e.dataTransfer.getData('text/plain');S.answers[q.n]=(S.answers[q.n]||[]).map(x=>x===o?null:x);save();examScreen(true)};
+}
+function pause(){if(S.endAt!=null){S.remaining=Math.max(0,S.endAt-Date.now());S.endAt=null}}
+function go(i){
+  const n=DATA.questions.length;i=Math.max(0,Math.min(n-1,i));
+  const a=secOf(S.idx),b=secOf(i);
+  if(b>a&&a<3&&!S.used[a]&&!S.offered[a]){pause();S.offered[a]=true;S.breakSec=a;S.pending=i;S.breakEndAt=null;S.phase='break';save();return breakScreen()}
+  S.idx=i;S.sel=null;save();examScreen();
+}
+function confirmFinish(){
+  const Q=DATA.questions;const un=Q.filter(q=>!answered(q)).length,fl=Q.filter(q=>S.flags[q.n]).length;
+  const el=modal(`<h2>Submit the exam?</h2><p style="line-height:1.6">You have <b>${un}</b> unanswered question${un===1?'':'s'} and <b>${fl}</b> flagged question${fl===1?'':'s'}. Once you submit you cannot change your answers.</p>
+  <div class="nav"><button class="btn ghost" id="no">Keep working</button><button class="btn" id="yes">Submit exam</button></div>`);
+  el.querySelector('#no').onclick=()=>el.remove();
+  el.querySelector('#yes').onclick=()=>{el.remove();finish(false)};
+}
+function finish(){
+  if(S.phase==='results')return;
+  if(S.phase==='exam')S.remaining=Math.max(0,S.endAt-Date.now());
+  S.endAt=null;S.phase='results';S.finishedAt=Date.now();save();closePanels();results();
+}
+
+/* ---------- break ---------- */
+function confirmBreak(){
+  const sec=secOf(S.idx);if(sec===3||S.used[sec])return;
+  const el=modal(`<h2>Take your break?</h2><p style="line-height:1.6">You can take one ${CONFIG.BREAK_MINUTES}-minute break now. The exam clock is paused and the questions are hidden until you resume. This break can only be used once.</p>
+  <div class="nav"><button class="btn ghost" id="no">Not now</button><button class="btn" id="yes">Start break</button></div>`);
+  el.querySelector('#no').onclick=()=>el.remove();
+  el.querySelector('#yes').onclick=()=>{el.remove();startBreak(sec)};
+}
+function startBreak(sec){
+  pause();S.phase='break';S.breakSec=sec;S.used[sec]=true;S.breakEndAt=Date.now()+CONFIG.BREAK_MINUTES*60000;save();breakScreen();
+}
+function breakScreen(){
+  closePanels();
+  const started=!!S.breakEndAt;
+  show(`<div class="wrap"><div class="card breakbox">
+    <h1>Break ${S.breakSec||''}</h1>
+    <p class="sub">Your exam clock is paused (${fmt(S.remaining)} remaining).</p>
+    ${started?`<div class="bigtimer" id="btimer">${fmt(Math.max(0,S.breakEndAt-Date.now())).slice(3)}</div><p class="sub">Break time remaining</p><button class="btn" id="res">End break &amp; resume exam</button>`
+    :`<p class="desc">You have finished the first part of this section. You may take a ${CONFIG.BREAK_MINUTES}-minute break, or skip it and continue.</p><button class="btn" id="sb">Start ${CONFIG.BREAK_MINUTES}-minute break</button><button class="btn outline" id="sk">Skip break &amp; continue</button>`}
+  </div></div>`);
+  startTick();
+  if(started)$('#res').onclick=endBreak;
+  else{$('#sb').onclick=()=>startBreak(S.breakSec);$('#sk').onclick=endBreak}
+}
+function endBreak(){
+  if(S.breakSec)S.used[S.breakSec]=true;
+  S.breakEndAt=null;S.phase='exam';S.endAt=Date.now()+S.remaining;
+  if(S.pending!=null){S.idx=S.pending;S.pending=null}
+  S.breakSec=null;save();startTick();examScreen();
+}
+
+/* ---------- scoring & results ---------- */
+function correct(q){const a=S.answers[q.n];if(!a)return false;
+  if(q.type==='match')return q.answer.every((x,i)=>a[i]===x);
+  return [...a].sort().join()===[...q.answer].sort().join()}
+function results(){
+  clearInterval(tick);closePanels();
+  const Q=DATA.questions;
+  const ok=Q.filter(correct).length,un=Q.filter(q=>!answered(q)).length,bad=Q.length-ok-un;
+  const p=x=>(x/Q.length*100).toFixed(1).replace(/\.0$/,'')+'%';
+  const used=CONFIG.EXAM_MINUTES*60000-S.remaining;
+  const list=Q.filter(q=>filter==='all'||(filter==='ok'&&correct(q))||(filter==='bad'&&answered(q)&&!correct(q))||(filter==='un'&&!answered(q))||(filter==='fl'&&S.flags[q.n]));
+  show(`${S.reviewed?'':'<div class="revbanner"><span>⭐ Please leave a review of your exam experience.</span><button class="btn sm" id="rv">Leave a review</button></div>'}
+  <div class="wrap wide"><div class="card bigscore">
+      <h1>Your result</h1>
+      <div class="pct">${p(ok)}</div>
+      <p class="sub" style="margin:0">${ok} of ${Q.length} questions answered correctly</p>
+      <div class="stats"><div class="stat"><b style="color:var(--green)">${p(ok)}</b>Correct<br><span>${ok} questions</span></div><div class="stat"><b style="color:var(--red)">${p(bad)}</b>Wrong<br><span>${bad} questions</span></div><div class="stat"><b>${p(un)}</b>Unanswered<br><span>${un} questions</span></div><div class="stat"><b>${fmt(used)}</b>Time used</div></div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h2>Answer review &amp; explanations</h2>
+      <div class="filters">${[['all','All'],['ok','Correct'],['bad','Wrong'],['un','Unanswered'],['fl','Flagged']].map(([k,t])=>`<button data-f="${k}" class="${filter===k?'on':''}">${t}</button>`).join('')}</div>
+      ${list.map(reviewItem).join('')||'<p class="sub">Nothing to show for this filter.</p>'}
+      <button class="btn outline" id="again">Start a new attempt</button>
+    </div></div>`);
+  document.querySelectorAll('.filters button').forEach(b=>b.onclick=()=>{filter=b.dataset.f;results()});
+  $('#again').onclick=()=>{if(confirm('Erase this attempt and start over?')){const r=S.reviewed;S=newState();S.reviewed=r;save();filter='all';hlOn=false;intro()}};
+  if($('#rv'))$('#rv').onclick=feedback;
+}
+function reviewItem(q){
+  const a=S.answers[q.n],isOk=correct(q),ans=answered(q);
+  const chip=isOk?'<span class="chip ok">Correct</span>':ans?'<span class="chip no">Wrong</span>':'<span class="chip na">Unanswered</span>';
+  const cs=q.case?`<div class="legend">${esc(DATA.cases[q.case].title)}</div>`:'';
+  let inner='';
+  if(q.type==='match'){
+    inner=q.items.map((t,i)=>{const y=a&&a[i],r=q.answer[i];return `<div class="ro ${y===r?'right':'wrong'}"><span class="badge">${L(i)}</span>${esc(t)}<br><b>Your answer:</b> ${esc(y||'—')} ${y===r?'✓':`&nbsp;·&nbsp;<b>Correct:</b> ${esc(r)}`}</div>`}).join('');
+  }else{
+    inner=q.choices.map((c,i)=>{const isA=q.answer.includes(i),mine=a&&a.includes(i);
+      return `<div class="ro ${isA?'right':mine?'wrong':''}"><b>${L(i)})</b> ${esc(c)} ${isA?'✓ <b>Correct answer</b>':''}${mine&&!isA?'✗ <b>Your answer</b>':mine&&isA?'· <b>Your answer</b>':''}</div>`}).join('');
+  }
+  const note=S.notes[q.n]?`<div class="expl" style="border-color:#ffb400"><b>Your comment:</b> ${esc(S.notes[q.n])}</div>`:'';
+  return `<div class="ri"><div><b>Question ${q.n}</b>${chip}${S.flags[q.n]?'<span class="chip na">⚑ Flagged</span>':''}</div>${cs}
+    <p style="line-height:1.6">${esc(q.text)}</p>${q.image?`<img class="qimg" src="${q.image}" alt="">`:''}${inner}<div class="expl"><b>Explanation.</b> ${esc(q.explanation)}</div>${note}</div>`;
+}
+
+/* ---------- review / feedback ---------- */
+function feedback(){
+  if(document.querySelector('.modal'))return;
+  let rating=5;
+  const el=modal(`<h2 style="text-align:center">How was your experience?</h2>
+   <p class="sub" style="font-size:15px">Your review may be shown on the exam page (as first name + last initial) to help other candidates.</p>
+   <div class="stars-in" id="st"></div>
+   <div class="two"><div><label class="f" for="fn">First name</label><input type="text" id="fn" maxlength="30" autocomplete="given-name"></div>
+   <div><label class="f" for="ln">Last name</label><input type="text" id="ln" maxlength="30" autocomplete="family-name"></div></div>
+   <label class="f" for="rc">Your review</label><textarea id="rc" maxlength="500" placeholder="What did you think of the questions and explanations?"></textarea>
+   <div class="err" id="re"></div>
+   <div class="nav"><button class="btn ghost" id="sk">Later</button><button class="btn" id="sb">Submit review</button></div>`);
+  const paint=()=>{el.querySelector('#st').innerHTML=[1,2,3,4,5].map(i=>`<button data-r="${i}" class="${i<=rating?'on':''}" aria-label="${i} stars">★</button>`).join('');el.querySelectorAll('#st button').forEach(b=>b.onclick=()=>{rating=+b.dataset.r;paint()})};paint();
+  el.querySelector('#sk').onclick=()=>el.remove();
+  el.querySelector('#sb').onclick=async()=>{
+    const comment=el.querySelector('#rc').value.trim(),first=el.querySelector('#fn').value.trim(),last=el.querySelector('#ln').value.trim();
+    if(!first||!last){el.querySelector('#re').textContent='Please enter your first and last name.';return}
+    if(comment.length<5){el.querySelector('#re').textContent='Please write a short comment.';return}
+    el.querySelector('#sb').disabled=true;
+    await postReview({first,last,rating,comment});
+    S.reviewed=true;save();
+    el.querySelector('.card').innerHTML='<h2 style="text-align:center">Thank you! ★</h2><p class="sub">Your review has been submitted.</p><button class="btn" id="ok">View my answers</button>';
+    el.querySelector('#ok').onclick=()=>{el.remove();results()};
+  };
+}
+landing();
+</script>
+</body>
+</html>
